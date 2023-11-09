@@ -5,10 +5,14 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-window.onload = function() {
-  //write your code here
+// Función para generar una carta aleatoria
+// Función para generar una carta aleatoria
+document
+  .getElementById("generarCarta")
+  .addEventListener("click", generarCartaAleatoria);
+
+function generarCartaAleatoria() {
   const numeros = [
-    "A",
     "2",
     "3",
     "4",
@@ -20,26 +24,25 @@ window.onload = function() {
     "10",
     "J",
     "Q",
-    "K"
+    "K",
+    "A"
   ];
-  const palos = ["♠", "♥", "♦", "♣"];
+  const palos = ["♣", "♦", "♥", "♠"];
 
-  const generarCartaAleatoria = () => {
-    const numeroAleatorio = numeros[Math.floor(Math.random() * numeros.length)];
-    const paloAleatorio = palos[Math.floor(Math.random() * palos.length)];
+  const numeroAleatorio = numeros[Math.floor(Math.random() * numeros.length)];
+  const paloAleatorio = palos[Math.floor(Math.random() * palos.length)];
 
-    const carta = document.getElementById("carta");
-    const palosElementos = carta.querySelectorAll(".palo");
+  const carta = document.getElementById("carta");
+  carta.querySelector(".numero").textContent = numeroAleatorio;
 
-    // Actualizar ambos elementos de clase "palo" con el mismo palo aleatorio
-    palosElementos.forEach(paloElemento => {
-      paloElemento.textContent = paloAleatorio;
-    });
-
-    carta.querySelector(".numero").textContent = numeroAleatorio;
-  };
-
-  document
-    .getElementById("generarCarta")
-    .addEventListener("click", generarCartaAleatoria);
-};
+  // Cambia el color de texto a rojo para corazón (♥) y diamante (♦)
+  const palosCarta = carta.querySelectorAll(".palo");
+  palosCarta.forEach(palo => {
+    palo.textContent = paloAleatorio;
+    if (paloAleatorio === "♥" || paloAleatorio === "♦") {
+      palo.style.color = "red";
+    } else {
+      palo.style.color = "black";
+    }
+  });
+}
